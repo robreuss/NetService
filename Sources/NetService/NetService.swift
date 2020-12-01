@@ -494,7 +494,8 @@ public class NetService {
         var res: UnsafeMutablePointer<addrinfo>?
         let error = getaddrinfo(host, "\(port)", nil, &res)
         guard error == 0 else {
-            didNotResolve(error: -1)
+            print(String(cString: gai_strerror(1)))
+            didNotResolve(error: Int(error))
             return
         }
         defer {
